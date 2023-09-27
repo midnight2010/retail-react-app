@@ -1,11 +1,12 @@
 {
   "name": "client",
-  "hash": "a938d06107498b5c01a4",
+  "hash": "ece1150750b8827a732e",
   "publicPath": "/mobify/bundle/development/",
   "outputPath": "C:\\Users\\David\\Desktop\\Programming\\FreshPWA\\retail-react-app\\build",
   "assetsByChunkName": {
     "main": [
-      "main.js"
+      "main.js",
+      "main.194fa9f773c268f1f855.hot-update.js"
     ],
     "pages-home": [
       "pages-home.js"
@@ -42,6 +43,10 @@
     ],
     "pages-account-wishlist": [
       "pages-account-wishlist.js"
+    ],
+    "pages-youtube": [
+      "pages-youtube.js",
+      "pages-youtube.194fa9f773c268f1f855.hot-update.js"
     ],
     "pages-page-not-found": [
       "pages-page-not-found.js"
@@ -81,7 +86,7 @@
     {
       "type": "asset",
       "name": "main.js",
-      "size": 1158240,
+      "size": 1159427,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -520,6 +525,58 @@
     },
     {
       "type": "asset",
+      "name": "pages-youtube.js",
+      "size": 3122,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "javascriptModule": false,
+        "related": {
+          "sourceMap": "pages-youtube.js.map"
+        }
+      },
+      "chunkNames": [
+        "pages-youtube"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "filteredRelated": 1,
+      "chunks": [
+        "pages-youtube"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "pages-youtube.194fa9f773c268f1f855.hot-update.js",
+      "size": 3104,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "194fa9f773c268f1f855",
+        "related": {
+          "sourceMap": "pages-youtube.194fa9f773c268f1f855.hot-update.js.map"
+        }
+      },
+      "chunkNames": [
+        "pages-youtube"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "filteredRelated": 1,
+      "chunks": [
+        "pages-youtube"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
       "name": "pages-login-redirect.js",
       "size": 3016,
       "emitted": false,
@@ -545,6 +602,33 @@
     },
     {
       "type": "asset",
+      "name": "main.194fa9f773c268f1f855.hot-update.js",
+      "size": 359,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "194fa9f773c268f1f855",
+        "related": {
+          "sourceMap": "main.194fa9f773c268f1f855.hot-update.js.map"
+        }
+      },
+      "chunkNames": [
+        "main"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "filteredRelated": 1,
+      "chunks": [
+        "main"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
       "name": "_1242.js",
       "size": 284,
       "emitted": false,
@@ -565,6 +649,25 @@
         "_1242"
       ],
       "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "main.194fa9f773c268f1f855.hot-update.json",
+      "size": 44,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "194fa9f773c268f1f855"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [],
+      "auxiliaryChunks": []
     }
   ],
   "namedChunkGroups": {
@@ -580,11 +683,14 @@
         },
         {
           "name": "main.js"
+        },
+        {
+          "name": "main.194fa9f773c268f1f855.hot-update.js"
         }
       ],
       "filteredAssets": 0,
       "assetsSize": null,
-      "filteredAuxiliaryAssets": 2,
+      "filteredAuxiliaryAssets": 3,
       "auxiliaryAssetsSize": null,
       "children": {},
       "childAssets": {}
@@ -869,6 +975,26 @@
       "children": {},
       "childAssets": {}
     },
+    "pages-youtube": {
+      "name": "pages-youtube",
+      "chunks": [
+        "pages-youtube"
+      ],
+      "assets": [
+        {
+          "name": "pages-youtube.js"
+        },
+        {
+          "name": "pages-youtube.194fa9f773c268f1f855.hot-update.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 2,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
     "pages-page-not-found": {
       "name": "pages-page-not-found",
       "chunks": [
@@ -892,7 +1018,8 @@
     {
       "id": "main",
       "files": [
-        "main.js"
+        "main.js",
+        "main.194fa9f773c268f1f855.hot-update.js"
       ]
     },
     {
@@ -971,6 +1098,13 @@
       "id": "pages-account-wishlist",
       "files": [
         "pages-account-wishlist.js"
+      ]
+    },
+    {
+      "id": "pages-youtube",
+      "files": [
+        "pages-youtube.js",
+        "pages-youtube.194fa9f773c268f1f855.hot-update.js"
       ]
     },
     {
