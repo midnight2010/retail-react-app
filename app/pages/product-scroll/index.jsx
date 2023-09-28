@@ -6,6 +6,7 @@ import {useProducts} from '@salesforce/commerce-sdk-react'
 const ProductScroll = () => {
     const id = uniqueId()
     const [fieldsValue, setFieldsValue] = useState([{id, value: ''}])
+    const [results, setResults] = useState({products: [], isLoading: false})
 
     const handleUpdate = (val, index) => {
         const copyFields = [...fieldsValue]
@@ -24,7 +25,16 @@ const ProductScroll = () => {
         setFieldsValue(copyFields)
     }
 
-    const handleProducts = () => {}
+    const handleProducts = async () => {
+        setResults({...results, isLoading: true})
+        const {data: products} = useProducts({
+            parameters: {
+                ids: '25752986M'
+            }
+        })
+        setResults({products, isLoading: !isLoading})
+    }
+    console.log(results)
 
     return (
         <Flex w="60vw" direction="column" align-items="center" mx="auto">
