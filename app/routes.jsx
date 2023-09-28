@@ -34,9 +34,11 @@ const Cart = loadable(() => import('./pages/cart'), {fallback})
 const Checkout = loadable(() => import('./pages/checkout'), {
     fallback
 })
+const RadioSwitch = loadable(() => import('./pages/radioSwitch'))
 const CheckoutConfirmation = loadable(() => import('./pages/checkout/confirmation'), {fallback})
 const LoginRedirect = loadable(() => import('./pages/login-redirect'), {fallback})
 const ProductDetail = loadable(() => import('./pages/product-detail'), {fallback})
+
 const ProductList = loadable(() => import('./pages/product-list'), {
     fallback
 })
@@ -88,6 +90,10 @@ export const routes = [
         path: '/cart',
         component: Cart,
         exact: true
+    },
+    {
+        path: '/radio-switch',
+        component: RadioSwitch
     },
     {
         path: '/product/:productId',
