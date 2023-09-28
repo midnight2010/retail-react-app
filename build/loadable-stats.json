@@ -1,12 +1,12 @@
 {
   "name": "client",
-  "hash": "b3c1f9289243f363f52d",
+  "hash": "49d22e97bd25cbb09735",
   "publicPath": "/mobify/bundle/development/",
   "outputPath": "C:\\Users\\David\\Desktop\\Programming\\FreshPWA\\retail-react-app\\build",
   "assetsByChunkName": {
     "main": [
       "main.js",
-      "main.e4cad5ea517583825c51.hot-update.js"
+      "main.45edd7329d722d5a2af7.hot-update.js"
     ],
     "pages-home": [
       "pages-home.js"
@@ -43,7 +43,7 @@
     ],
     "pages-product-scroll": [
       "pages-product-scroll.js",
-      "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
+      "pages-product-scroll.45edd7329d722d5a2af7.hot-update.js"
     ],
     "pages-account-wishlist": [
       "pages-account-wishlist.js"
@@ -86,7 +86,7 @@
     {
       "type": "asset",
       "name": "main.js",
-      "size": 1160761,
+      "size": 1160715,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -161,7 +161,7 @@
     {
       "type": "asset",
       "name": "pages-product-list.js",
-      "size": 123405,
+      "size": 123441,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -475,33 +475,8 @@
     },
     {
       "type": "asset",
-      "name": "pages-registration.js",
-      "size": 9015,
-      "emitted": false,
-      "comparedForEmit": false,
-      "cached": true,
-      "info": {
-        "javascriptModule": false,
-        "related": {
-          "sourceMap": "pages-registration.js.map"
-        }
-      },
-      "chunkNames": [
-        "pages-registration"
-      ],
-      "chunkIdHints": [],
-      "auxiliaryChunkNames": [],
-      "auxiliaryChunkIdHints": [],
-      "filteredRelated": 1,
-      "chunks": [
-        "pages-registration"
-      ],
-      "auxiliaryChunks": []
-    },
-    {
-      "type": "asset",
       "name": "pages-product-scroll.js",
-      "size": 8714,
+      "size": 9342,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -525,17 +500,17 @@
     },
     {
       "type": "asset",
-      "name": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js",
-      "size": 8696,
+      "name": "pages-product-scroll.45edd7329d722d5a2af7.hot-update.js",
+      "size": 9324,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "e4cad5ea517583825c51",
+        "fullhash": "45edd7329d722d5a2af7",
         "related": {
-          "sourceMap": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js.map"
+          "sourceMap": "pages-product-scroll.45edd7329d722d5a2af7.hot-update.js.map"
         }
       },
       "chunkNames": [
@@ -547,6 +522,31 @@
       "filteredRelated": 1,
       "chunks": [
         "pages-product-scroll"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "pages-registration.js",
+      "size": 9015,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "javascriptModule": false,
+        "related": {
+          "sourceMap": "pages-registration.js.map"
+        }
+      },
+      "chunkNames": [
+        "pages-registration"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "filteredRelated": 1,
+      "chunks": [
+        "pages-registration"
       ],
       "auxiliaryChunks": []
     },
@@ -602,7 +602,7 @@
     },
     {
       "type": "asset",
-      "name": "main.e4cad5ea517583825c51.hot-update.js",
+      "name": "main.45edd7329d722d5a2af7.hot-update.js",
       "size": 359,
       "emitted": false,
       "comparedForEmit": false,
@@ -610,9 +610,9 @@
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "e4cad5ea517583825c51",
+        "fullhash": "45edd7329d722d5a2af7",
         "related": {
-          "sourceMap": "main.e4cad5ea517583825c51.hot-update.js.map"
+          "sourceMap": "main.45edd7329d722d5a2af7.hot-update.js.map"
         }
       },
       "chunkNames": [
@@ -652,7 +652,7 @@
     },
     {
       "type": "asset",
-      "name": "main.e4cad5ea517583825c51.hot-update.json",
+      "name": "main.45edd7329d722d5a2af7.hot-update.json",
       "size": 51,
       "emitted": false,
       "comparedForEmit": false,
@@ -660,7 +660,7 @@
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "e4cad5ea517583825c51"
+        "fullhash": "45edd7329d722d5a2af7"
       },
       "chunkNames": [],
       "chunkIdHints": [],
@@ -685,7 +685,7 @@
           "name": "main.js"
         },
         {
-          "name": "main.e4cad5ea517583825c51.hot-update.js"
+          "name": "main.45edd7329d722d5a2af7.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -960,7 +960,7 @@
           "name": "pages-product-scroll.js"
         },
         {
-          "name": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
+          "name": "pages-product-scroll.45edd7329d722d5a2af7.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -1023,7 +1023,7 @@
       "id": "main",
       "files": [
         "main.js",
-        "main.e4cad5ea517583825c51.hot-update.js"
+        "main.45edd7329d722d5a2af7.hot-update.js"
       ]
     },
     {
@@ -1102,7 +1102,7 @@
       "id": "pages-product-scroll",
       "files": [
         "pages-product-scroll.js",
-        "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
+        "pages-product-scroll.45edd7329d722d5a2af7.hot-update.js"
       ]
     },
     {

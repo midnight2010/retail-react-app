@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Flex, Container, HStack, Input} from '../../components/shared/ui/index'
+import {Button, Flex, Container, HStack, Input, Heading} from '../../components/shared/ui/index'
 import {uniqueId} from 'lodash'
 import {useCommerceApi, useAccessToken} from '@salesforce/commerce-sdk-react'
 import ProductScroller from '../../components/product-scroller'
@@ -29,19 +29,36 @@ const ProductScroll = () => {
     }
 
     const handleProducts = async () => {
-        setLoading(!loading)
+        const copyFields = [...fieldsValue]
+        const ids = copyFields.map((field) => field.value)
+
+        setLoading(true)
         const token = await getTokenWhenReady()
         const results = await api.shopperProducts.getProducts({
             parameters: {
-                ids: '25752986M'
+                ids: ids,
+
+                allImages: false
             },
             headers: {
                 authorization: `Bearer ${token}`
             }
         })
-        setLoading(!loading)
-        console.log(results?.data)
-        setProducts(results?.data)
+        setLoading(false)
+
+        const newResults = results?.data.map((result) => {
+            const {currency, imageGroups, price, id, name} = result
+            const newResult = {
+                currency,
+                price,
+                id,
+                name,
+                image: imageGroups[0]['images'][0]
+            }
+            return newResult
+        })
+
+        setProducts(newResults)
     }
 
     return (
@@ -53,17 +70,23 @@ const ProductScroll = () => {
                             onChange={(e) => handleUpdate(e.target.value, index)}
                             value={field.value}
                         />
-                        <Button onClick={() => handleRemove(field.id)}>Remove</Button>
+                        {index > 0 && (
+                            <Button onClick={() => handleRemove(field.id)}>Remove</Button>
+                        )}
                     </HStack>
                 ))}
             </Container>
 
             <Flex direction="column" gap={2}>
                 <Button onClick={handleField}>Add Field</Button>
-                <Button onClick={handleProducts}>Get Products</Button>
+                <Button onClick={() => handleProducts()}>Get Products</Button>
             </Flex>
             <Container>
-                <ProductScroller products={products} />
+                {loading ? (
+                    <Heading align="center">Wait for fetch...</Heading>
+                ) : (
+                    <ProductScroller my="10px" products={products} />
+                )}
             </Container>
         </Flex>
     )

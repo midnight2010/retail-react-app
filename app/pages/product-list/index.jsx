@@ -152,6 +152,8 @@ const ProductList = (props) => {
         }
     )
 
+    console.log(productSearchResult)
+
     const {error, data: category} = useCategory(
         {
             parameters: {
