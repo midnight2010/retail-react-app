@@ -30,10 +30,8 @@ const reducer = (state, action) => {
             return {
                 sum: firstValue * secondValue
             }
-
-        default:
-            return state.sum
     }
+    throw Error('Unknown action: ' + action.type)
 }
 
 const Calculator = () => {
@@ -81,7 +79,6 @@ const Calculator = () => {
                         <NumberDecrementStepper />
                     </NumberInputStepper>
                 </NumberInput>
-                {console.log(first, second, sign)}
                 <Select size="lg" value={sign} onChange={(e) => setSign(e.target.value)}>
                     <option value="+">+</option>
                     <option value="-">-</option>
@@ -90,7 +87,7 @@ const Calculator = () => {
                 </Select>
                 <Button onClick={handleClear}>Clear</Button>
             </Stack>
-            <Text d="block" align="center" mx="auto" my="20px" fontSize="25px">
+            <Text d="block" align="center" my="20px" fontSize="25px">
                 {state.sum}
             </Text>
         </Container>
