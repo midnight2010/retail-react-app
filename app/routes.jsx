@@ -40,6 +40,7 @@ const ProductDetail = loadable(() => import('./pages/product-detail'), {fallback
 const ProductList = loadable(() => import('./pages/product-list'), {
     fallback
 })
+const ProductScroll = loadable(() => import('./pages/product-scroll'))
 const Wishlist = loadable(() => import('./pages/account/wishlist'), {
     fallback
 })
@@ -100,6 +101,10 @@ export const routes = [
     {
         path: '/category/:categoryId',
         component: ProductList
+    },
+    {
+        path: '/product-scroll',
+        component: ProductScroll
     },
     {
         path: '/account/wishlist',

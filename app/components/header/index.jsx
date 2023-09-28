@@ -48,6 +48,7 @@ import {navLinks, messages} from '@salesforce/retail-react-app/app/pages/account
 import useNavigation from '@salesforce/retail-react-app/app/hooks/use-navigation'
 import LoadingSpinner from '@salesforce/retail-react-app/app/components/loading-spinner'
 import {isHydrated, noop} from '@salesforce/retail-react-app/app/utils/utils'
+import {Search2Icon} from '@salesforce/retail-react-app/node_modules/@chakra-ui/icons/dist/Search2'
 
 const ENTER_KEY = 'Enter'
 
@@ -141,6 +142,11 @@ const Header = ({
                         onClick={onLogoClick}
                     />
                     <Box {...styles.bodyContainer}>{children}</Box>
+                    <Box mr="20px">
+                        <Link to="/product-scroll">
+                            <Search2Icon transform="rotate(90deg)" />
+                        </Link>
+                    </Box>
                     <Box {...styles.searchContainer}>
                         <Search
                             placeholder={intl.formatMessage({
