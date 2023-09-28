@@ -1,6 +1,7 @@
 import React, {useId, useState} from 'react'
 import {Button, Flex, VStack, Container, HStack, Input} from '../../components/shared/ui/index'
 import {uniqueId} from 'lodash'
+import {useProducts} from '@salesforce/commerce-sdk-react'
 
 const ProductScroll = () => {
     const id = uniqueId()
@@ -11,7 +12,7 @@ const ProductScroll = () => {
         copyFields[index] = {...copyFields[index], value: val}
         setFieldsValue(copyFields)
     }
-    const addField = () => {
+    const handleField = () => {
         const copyFields = [...fieldsValue]
         const field = {id: uniqueId(), value: ''}
         copyFields.push(field)
@@ -22,6 +23,9 @@ const ProductScroll = () => {
         const copyFields = [...fieldsValue].filter((field) => field.id !== id)
         setFieldsValue(copyFields)
     }
+
+    const handleProducts = () => {}
+
     return (
         <Flex w="60vw" direction="column" align-items="center" mx="auto">
             <Container my="20px">
@@ -36,8 +40,8 @@ const ProductScroll = () => {
                 ))}
             </Container>
             <Flex direction="column" gap={2}>
-                <Button onClick={addField}>Add Field</Button>
-                <Button>Get Products</Button>
+                <Button onClick={handleField}>Add Field</Button>
+                <Button onClick={handleProducts}>Get Products</Button>
             </Flex>
             <Container></Container>
         </Flex>
