@@ -66,7 +66,8 @@ const ProductTile = (props) => {
         ...rest
     } = props
 
-    const {currency, image, price, productId, hitType} = product
+    let {currency, imageGroups: image, price, productId, hitType} = product
+    image = image[1]['images'][0]
 
     // ProductTile is used by two components, RecommendedProducts and ProductList.
     // RecommendedProducts provides a localized product name as `name` and non-localized product

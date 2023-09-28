@@ -1,12 +1,12 @@
 {
   "name": "client",
-  "hash": "dcbc6b2d87dd3d27981e",
+  "hash": "b3c1f9289243f363f52d",
   "publicPath": "/mobify/bundle/development/",
   "outputPath": "C:\\Users\\David\\Desktop\\Programming\\FreshPWA\\retail-react-app\\build",
   "assetsByChunkName": {
     "main": [
       "main.js",
-      "main.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+      "main.e4cad5ea517583825c51.hot-update.js"
     ],
     "pages-home": [
       "pages-home.js"
@@ -43,7 +43,7 @@
     ],
     "pages-product-scroll": [
       "pages-product-scroll.js",
-      "pages-product-scroll.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+      "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
     ],
     "pages-account-wishlist": [
       "pages-account-wishlist.js"
@@ -86,7 +86,7 @@
     {
       "type": "asset",
       "name": "main.js",
-      "size": 1160717,
+      "size": 1160761,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -501,7 +501,7 @@
     {
       "type": "asset",
       "name": "pages-product-scroll.js",
-      "size": 8192,
+      "size": 8714,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -525,17 +525,17 @@
     },
     {
       "type": "asset",
-      "name": "pages-product-scroll.b9fd4dc8aaf0f5fe9ff5.hot-update.js",
-      "size": 8174,
+      "name": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js",
+      "size": 8696,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "b9fd4dc8aaf0f5fe9ff5",
+        "fullhash": "e4cad5ea517583825c51",
         "related": {
-          "sourceMap": "pages-product-scroll.b9fd4dc8aaf0f5fe9ff5.hot-update.js.map"
+          "sourceMap": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js.map"
         }
       },
       "chunkNames": [
@@ -602,7 +602,7 @@
     },
     {
       "type": "asset",
-      "name": "main.b9fd4dc8aaf0f5fe9ff5.hot-update.js",
+      "name": "main.e4cad5ea517583825c51.hot-update.js",
       "size": 359,
       "emitted": false,
       "comparedForEmit": false,
@@ -610,9 +610,9 @@
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "b9fd4dc8aaf0f5fe9ff5",
+        "fullhash": "e4cad5ea517583825c51",
         "related": {
-          "sourceMap": "main.b9fd4dc8aaf0f5fe9ff5.hot-update.js.map"
+          "sourceMap": "main.e4cad5ea517583825c51.hot-update.js.map"
         }
       },
       "chunkNames": [
@@ -652,7 +652,7 @@
     },
     {
       "type": "asset",
-      "name": "main.b9fd4dc8aaf0f5fe9ff5.hot-update.json",
+      "name": "main.e4cad5ea517583825c51.hot-update.json",
       "size": 51,
       "emitted": false,
       "comparedForEmit": false,
@@ -660,7 +660,7 @@
       "info": {
         "hotModuleReplacement": true,
         "immutable": true,
-        "fullhash": "b9fd4dc8aaf0f5fe9ff5"
+        "fullhash": "e4cad5ea517583825c51"
       },
       "chunkNames": [],
       "chunkIdHints": [],
@@ -685,7 +685,7 @@
           "name": "main.js"
         },
         {
-          "name": "main.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+          "name": "main.e4cad5ea517583825c51.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -960,7 +960,7 @@
           "name": "pages-product-scroll.js"
         },
         {
-          "name": "pages-product-scroll.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+          "name": "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -1023,7 +1023,7 @@
       "id": "main",
       "files": [
         "main.js",
-        "main.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+        "main.e4cad5ea517583825c51.hot-update.js"
       ]
     },
     {
@@ -1102,7 +1102,7 @@
       "id": "pages-product-scroll",
       "files": [
         "pages-product-scroll.js",
-        "pages-product-scroll.b9fd4dc8aaf0f5fe9ff5.hot-update.js"
+        "pages-product-scroll.e4cad5ea517583825c51.hot-update.js"
       ]
     },
     {

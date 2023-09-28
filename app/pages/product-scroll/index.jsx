@@ -1,12 +1,15 @@
-import React, {useId, useState} from 'react'
-import {Button, Flex, VStack, Container, HStack, Input} from '../../components/shared/ui/index'
+import React, {useState} from 'react'
+import {Button, Flex, Container, HStack, Input} from '../../components/shared/ui/index'
 import {uniqueId} from 'lodash'
-import {useProducts} from '@salesforce/commerce-sdk-react'
-
+import {useCommerceApi, useAccessToken} from '@salesforce/commerce-sdk-react'
+import ProductScroller from '../../components/product-scroller'
 const ProductScroll = () => {
+    const api = useCommerceApi()
+    const {getTokenWhenReady} = useAccessToken()
     const id = uniqueId()
     const [fieldsValue, setFieldsValue] = useState([{id, value: ''}])
-    const [results, setResults] = useState({products: [], isLoading: false})
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const handleUpdate = (val, index) => {
         const copyFields = [...fieldsValue]
@@ -26,15 +29,20 @@ const ProductScroll = () => {
     }
 
     const handleProducts = async () => {
-        setResults({...results, isLoading: true})
-        const {data: products} = useProducts({
+        setLoading(!loading)
+        const token = await getTokenWhenReady()
+        const results = await api.shopperProducts.getProducts({
             parameters: {
                 ids: '25752986M'
+            },
+            headers: {
+                authorization: `Bearer ${token}`
             }
         })
-        setResults({products, isLoading: !isLoading})
+        setLoading(!loading)
+        console.log(results?.data)
+        setProducts(results?.data)
     }
-    console.log(results)
 
     return (
         <Flex w="60vw" direction="column" align-items="center" mx="auto">
@@ -49,11 +57,14 @@ const ProductScroll = () => {
                     </HStack>
                 ))}
             </Container>
+
             <Flex direction="column" gap={2}>
                 <Button onClick={handleField}>Add Field</Button>
                 <Button onClick={handleProducts}>Get Products</Button>
             </Flex>
-            <Container></Container>
+            <Container>
+                <ProductScroller products={products} />
+            </Container>
         </Flex>
     )
 }
