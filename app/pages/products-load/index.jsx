@@ -34,7 +34,6 @@ function ProductsLoad() {
 
         setSelectedItem(newProduct)
         onOpen()
-        console.log(isOpen)
     }
 
     const getProducts = useCallback(async () => {
