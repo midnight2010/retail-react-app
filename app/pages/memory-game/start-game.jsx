@@ -9,7 +9,6 @@ import {
     SimpleGrid,
     Text,
     Link,
-    GridItem,
     Img
 } from '../../components/shared/ui/index'
 
@@ -32,7 +31,7 @@ let images = [
 const faceCard = getAssetUrl('static/memoryImages/default.jpg')
 
 function StartGame() {
-    const [counter, setCounter] = useState({min: '2', sec: '00'})
+    const [counter, setCounter] = useState({min: '02', sec: '00'})
     const [gameOver, setGameOver] = useState(false)
     const [cards, setCards] = useState([])
     const [cardsCheck, setCardsCheck] = useState([])
@@ -52,11 +51,15 @@ function StartGame() {
     }
 
     const timerFunction = () => {
-        if (counter.min === '0') return
+        if (gameOver) return
         time -= 1
-        const newState = {min: parseInt(time / 60), sec: time % 60}
+        let min = parseInt(time / 60)
+        let sec = time % 60
+        const newState = {min: min < 10 ? '0' + min : min, sec: sec < 10 ? '0' + sec : sec}
 
-        const timer = setInterval(() => setCounter(newState), 1000)
+        const timer = setInterval(() => {
+            setCounter(newState)
+        }, 1000)
 
         if (time == 0) {
             setCounter({min: '0', sec: '00'})
@@ -66,15 +69,21 @@ function StartGame() {
     }
 
     const handleClick = (e, card) => {
-        e.target.style.transform = 'rotateY(180deg)'
+        if (card.active) return
+        e.target.style.transform = 'rotateY(90deg)'
 
-        setTimeout(() => {
+        const eventHandler = (e) => {
+            e.target.style.transform = 'rotateY(180deg)'
             const newCards = [...cards]
-            const index = cards.indexOf(card)
+            const index = newCards.indexOf(card)
             newCards[index] = {...card, active: true}
             setCards(newCards)
-            setCardsCheck((cardsCheck) => [...cardsCheck, card])
-        }, 400)
+            e.target.removeEventListener('transitionend', eventHandler)
+        }
+
+        e.target.addEventListener('transitionend', eventHandler)
+
+        setCardsCheck((cardsCheck) => [...cardsCheck, {...card, event: e}])
     }
 
     useEffect(() => {
@@ -83,7 +92,40 @@ function StartGame() {
 
     useEffect(timerFunction, [counter])
 
-    useEffect(() => {}, [cardsCheck])
+    useEffect(() => {
+        console.log(cardsCheck)
+        if (cardsCheck.length === 2) {
+            //         console.log(cardsCheck)
+
+            //         console.log(cardsCheck)
+            //         const regexp = new RegExp('[a-z]+(?=[A-Z].jpg)')
+            //         const target1 = cardsCheck[0].src.match(regexp)[0]
+            //         const target2 = cardsCheck[1].src.match(regexp)[0]
+
+            //         console.log(target1, target2)
+            //         if (target1 !== target2) {
+            //             cardsCheck[0].event.target.style.transform = 'rotateY(90deg)'
+            //             cardsCheck[1].event.target.style.transform = 'rotateY(90deg)'
+
+            //             cardsCheck[1].event.target.addEventListener('transitionend', () => {
+            //                 cardsCheck[0].event.target.style.transform = 'rotateY(0deg)'
+            //                 cardsCheck[1].event.target.style.transform = 'rotateY(0deg)'
+            //                 const newCards = [...cards]
+
+            //                 const findCard1 = cards.find((card) => card.src === cardsCheck[0].src)
+            //                 const findCard2 = cards.find((card) => card.src === cardsCheck[1].src)
+            //                 const index1 = newCards.indexOf(findCard1)
+            //                 const index2 = newCards.indexOf(findCard2)
+
+            //                 newCards[index1] = {...cardsCheck[0], active: false}
+            //                 newCards[index2] = {...cardsCheck[1], active: false}
+
+            //                 setCards(newCards)
+            //             })
+            //         }
+            setCardsCheck([])
+        }
+    }, [cardsCheck])
 
     return (
         <Container>
@@ -113,7 +155,7 @@ function StartGame() {
                         zIndex={9999}
                         border="1px solid gray"
                         borderRadius="5px"
-                        boxSize="40%"
+                        boxSize="60%"
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
@@ -122,17 +164,25 @@ function StartGame() {
                         <Link onClick={() => window.location.reload(true)}>Try Again</Link>
                     </Box>
                 )}
-                <SimpleGrid columns={4} spacing={5} opacity="1" m="10px" w="50%" mx="auto">
+                <SimpleGrid
+                    columns={4}
+                    spacing={5}
+                    m="10px"
+                    w="50%"
+                    mx="auto"
+                    opacity={counter.sec === '00' ? '0.5' : '1'}
+                >
                     {cards.map((card, index) => (
-                        <Box key={index}>
+                        <Box key={index} mt="20px">
                             <Img
-                                transition="transform 0.8s ease-in-out"
+                                transition="transform 0.3s ease-in-out"
                                 position="relative"
                                 zIndex="9998px"
                                 w="100px"
                                 h="150px"
                                 src={card.active ? card.src : faceCard}
                                 alt="Card"
+                                border="1px solid gray"
                                 _hover={{
                                     border: '1px solid gray',
                                     boxShadow: '0 0 5px 0 '
