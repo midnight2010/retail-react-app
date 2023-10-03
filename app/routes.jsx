@@ -43,6 +43,7 @@ const ProductList = loadable(() => import('./pages/product-list'), {
 const Wishlist = loadable(() => import('./pages/account/wishlist'), {
     fallback
 })
+const Tasks = loadable(() => import('./pages/tasks'))
 const PageNotFound = loadable(() => import('./pages/page-not-found'))
 
 export const routes = [
@@ -104,6 +105,10 @@ export const routes = [
     {
         path: '/account/wishlist',
         component: Wishlist
+    },
+    {
+        path: '/tasks',
+        component: Tasks
     },
     {
         path: '*',
