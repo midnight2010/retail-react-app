@@ -35,6 +35,7 @@ function StartGame() {
     const [gameOver, setGameOver] = useState(false)
     const [cards, setCards] = useState([])
     const [cardsCheck, setCardsCheck] = useState([])
+    const [win, setWin] = useState(false)
 
     const shuffle = () => {
         let newImages = []
@@ -62,28 +63,29 @@ function StartGame() {
         }, 1000)
 
         if (time == 0) {
-            setCounter({min: '0', sec: '00'})
+            setCounter({min: '00', sec: '00'})
             setGameOver(true)
         }
         return () => clearInterval(timer)
     }
 
-    const handleClick = (e, card) => {
+    const handleClick = (e, card, index) => {
         if (card.active) return
         e.target.style.transform = 'rotateY(90deg)'
 
         const eventHandler = (e) => {
             e.target.style.transform = 'rotateY(180deg)'
-            const newCards = [...cards]
-            const index = newCards.indexOf(card)
-            newCards[index] = {...card, active: true}
-            setCards(newCards)
+            const copyCards = [...cards]
+
+            copyCards[index] = {...card, active: true}
+            console.log(copyCards)
+
+            setCards(copyCards)
+            setCardsCheck((cardsCheck) => [...cardsCheck, {...card, e: e.target.style}])
             e.target.removeEventListener('transitionend', eventHandler)
         }
 
         e.target.addEventListener('transitionend', eventHandler)
-
-        setCardsCheck((cardsCheck) => [...cardsCheck, {...card, event: e}])
     }
 
     useEffect(() => {
@@ -93,36 +95,42 @@ function StartGame() {
     useEffect(timerFunction, [counter])
 
     useEffect(() => {
-        console.log(cardsCheck)
         if (cardsCheck.length === 2) {
-            //         console.log(cardsCheck)
+            const regexp = new RegExp('[a-z]+(?=[A-Z].jpg)')
+            const target1 = cardsCheck[0].src.match(regexp)[0]
+            const target2 = cardsCheck[1].src.match(regexp)[0]
 
-            //         console.log(cardsCheck)
-            //         const regexp = new RegExp('[a-z]+(?=[A-Z].jpg)')
-            //         const target1 = cardsCheck[0].src.match(regexp)[0]
-            //         const target2 = cardsCheck[1].src.match(regexp)[0]
+            if (target1 !== target2) {
+                const newCards = [...cards]
 
-            //         console.log(target1, target2)
-            //         if (target1 !== target2) {
-            //             cardsCheck[0].event.target.style.transform = 'rotateY(90deg)'
-            //             cardsCheck[1].event.target.style.transform = 'rotateY(90deg)'
+                const findCard1 = newCards.find((card) => card.src === cardsCheck[0].src)
+                const findCard2 = newCards.find((card) => card.src === cardsCheck[1].src)
+                const index1 = newCards.indexOf(findCard1)
+                const index2 = newCards.indexOf(findCard2)
+                console.log('Indexes', index1, index2)
 
-            //             cardsCheck[1].event.target.addEventListener('transitionend', () => {
-            //                 cardsCheck[0].event.target.style.transform = 'rotateY(0deg)'
-            //                 cardsCheck[1].event.target.style.transform = 'rotateY(0deg)'
-            //                 const newCards = [...cards]
+                newCards[index1] = {...findCard1, active: false}
+                newCards[index2] = {...findCard2, active: false}
+                console.log('Card1-2', newCards[index1], newCards[index2])
 
-            //                 const findCard1 = cards.find((card) => card.src === cardsCheck[0].src)
-            //                 const findCard2 = cards.find((card) => card.src === cardsCheck[1].src)
-            //                 const index1 = newCards.indexOf(findCard1)
-            //                 const index2 = newCards.indexOf(findCard2)
+                setTimeout(() => {
+                    cardsCheck[0].e.transform = 'rotateY(90deg)'
+                    cardsCheck[1].e.transform = 'rotateY(90deg)'
+                    setTimeout(() => {
+                        cardsCheck[0].e.transform = 'rotateY(0deg)'
+                        cardsCheck[1].e.transform = 'rotateY(0deg)'
+                        console.log('Cards', newCards)
+                        setCards(newCards)
+                    }, 200)
+                    const winFunc = cards.every((card) => card.active === true)
 
-            //                 newCards[index1] = {...cardsCheck[0], active: false}
-            //                 newCards[index2] = {...cardsCheck[1], active: false}
+                    if (winFunc) {
+                        setWin(true)
+                        setGameOver(true)
+                    }
+                }, 800)
+            }
 
-            //                 setCards(newCards)
-            //             })
-            //         }
             setCardsCheck([])
         }
     }, [cardsCheck])
@@ -160,8 +168,10 @@ function StartGame() {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <Heading p="20px">Game Over</Heading>
-                        <Link onClick={() => window.location.reload(true)}>Try Again</Link>
+                        <Heading p="20px">{win ? 'You Won' : 'Game Over'}</Heading>
+                        <Link onClick={() => window.location.reload(true)}>
+                            {win ? 'Play Again' : 'Try Again'}
+                        </Link>
                     </Box>
                 )}
                 <SimpleGrid
@@ -171,9 +181,10 @@ function StartGame() {
                     w="50%"
                     mx="auto"
                     opacity={counter.sec === '00' ? '0.5' : '1'}
+                    pointerEvents={gameOver || win ? 'none' : 'auto'}
                 >
                     {cards.map((card, index) => (
-                        <Box key={index} mt="20px">
+                        <Box key={index} mt="20px" onClick={(e) => handleClick(e, card, index)}>
                             <Img
                                 transition="transform 0.3s ease-in-out"
                                 position="relative"
@@ -187,7 +198,6 @@ function StartGame() {
                                     border: '1px solid gray',
                                     boxShadow: '0 0 5px 0 '
                                 }}
-                                onClick={(e) => handleClick(e, card)}
                             />
                         </Box>
                     ))}

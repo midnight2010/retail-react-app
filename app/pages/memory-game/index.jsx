@@ -29,6 +29,7 @@ function MemoryGame() {
                     >
                         {index !== options.length - 1 ? (
                             <Link
+                                _hover={{textDecoration: 'none'}}
                                 to={
                                     option &&
                                     option
@@ -40,7 +41,11 @@ function MemoryGame() {
                                 {option}
                             </Link>
                         ) : (
-                            <Link href="https://www.github.com" isExternal>
+                            <Link
+                                href="https://www.github.com"
+                                isExternal
+                                _hover={{textDecoration: 'none'}}
+                            >
                                 <GithubLogo />
                             </Link>
                         )}
