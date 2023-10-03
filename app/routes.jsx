@@ -43,6 +43,8 @@ const ProductList = loadable(() => import('./pages/product-list'), {
 const Wishlist = loadable(() => import('./pages/account/wishlist'), {
     fallback
 })
+const MemoryGame = loadable(() => import('./pages/memory-game'))
+const StartGame = loadable(() => import('./pages/memory-game/start-game'))
 const PageNotFound = loadable(() => import('./pages/page-not-found'))
 
 export const routes = [
@@ -104,6 +106,14 @@ export const routes = [
     {
         path: '/account/wishlist',
         component: Wishlist
+    },
+    {
+        path: '/play',
+        component: MemoryGame
+    },
+    {
+        path: '/start-game',
+        component: StartGame
     },
     {
         path: '*',
