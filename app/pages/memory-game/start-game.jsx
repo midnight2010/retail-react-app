@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {getAssetUrl} from '@salesforce/pwa-kit-react-sdk/ssr/universal/utils'
+import {keyframes, usePrefersReducedMotion} from '@chakra-ui/react'
 
 import {
     Box,
@@ -11,6 +12,18 @@ import {
     Link,
     Img
 } from '../../components/shared/ui/index'
+
+const spin = keyframes`
+0% {width:10px;
+   height:10px;
+   margin-right:5px
+   }
+50% {width:14px;
+   height:14px;
+   margin-right:1px}
+100% {width:10px;
+     height:10px;
+     margin-right:5px}`
 
 let time = 120
 let images = [
@@ -32,10 +45,12 @@ const faceCard = getAssetUrl('static/memoryImages/default.jpg')
 
 function StartGame() {
     const [counter, setCounter] = useState({min: '02', sec: '00'})
-    const [gameOver, setGameOver] = useState(false)
+    const [gameOver, setGameOver] = useState({lost: false, won: false})
     const [cards, setCards] = useState([])
     const [cardsCheck, setCardsCheck] = useState([])
-    const [win, setWin] = useState(false)
+    const prefersReducedMotion = usePrefersReducedMotion()
+
+    const animation = prefersReducedMotion ? `${spin} 1s infinite` : undefined
 
     const shuffle = () => {
         let newImages = []
@@ -52,19 +67,19 @@ function StartGame() {
     }
 
     const timerFunction = () => {
-        if (gameOver) return
+        if (gameOver.lost || gameOver.won) return
+
         time -= 1
         let min = parseInt(time / 60)
         let sec = time % 60
         const newState = {min: min < 10 ? '0' + min : min, sec: sec < 10 ? '0' + sec : sec}
-
         const timer = setInterval(() => {
             setCounter(newState)
         }, 1000)
 
         if (time == 0) {
             setCounter({min: '00', sec: '00'})
-            setGameOver(true)
+            setGameOver((game) => ({...game, lost: true}))
         }
         return () => clearInterval(timer)
     }
@@ -78,10 +93,9 @@ function StartGame() {
             const copyCards = [...cards]
 
             copyCards[index] = {...card, active: true}
-            console.log(copyCards)
 
             setCards(copyCards)
-            setCardsCheck((cardsCheck) => [...cardsCheck, {...card, e: e.target.style}])
+            setCardsCheck((cardsCheck) => [...cardsCheck, {...card, e: e.target}])
             e.target.removeEventListener('transitionend', eventHandler)
         }
 
@@ -107,55 +121,56 @@ function StartGame() {
                 const findCard2 = newCards.find((card) => card.src === cardsCheck[1].src)
                 const index1 = newCards.indexOf(findCard1)
                 const index2 = newCards.indexOf(findCard2)
-                console.log('Indexes', index1, index2)
 
                 newCards[index1] = {...findCard1, active: false}
                 newCards[index2] = {...findCard2, active: false}
-                console.log('Card1-2', newCards[index1], newCards[index2])
 
                 setTimeout(() => {
-                    cardsCheck[0].e.transform = 'rotateY(90deg)'
-                    cardsCheck[1].e.transform = 'rotateY(90deg)'
+                    cardsCheck[0].e.style.transform = 'rotateY(90deg)'
+                    cardsCheck[1].e.style.transform = 'rotateY(90deg)'
                     setTimeout(() => {
-                        cardsCheck[0].e.transform = 'rotateY(0deg)'
-                        cardsCheck[1].e.transform = 'rotateY(0deg)'
-                        console.log('Cards', newCards)
+                        cardsCheck[0].e.style.transform = 'rotateY(0deg)'
+                        cardsCheck[1].e.style.transform = 'rotateY(0deg)'
+
                         setCards(newCards)
                     }, 200)
-                    const winFunc = cards.every((card) => card.active === true)
-
-                    if (winFunc) {
-                        setWin(true)
-                        setGameOver(true)
-                    }
                 }, 800)
             }
 
+            setTimeout(() => {
+                const winFunc = cards.every((card) => card.active === true)
+
+                if (winFunc) {
+                    setGameOver((game) => ({...game, won: true}))
+                }
+            }, 300)
             setCardsCheck([])
         }
     }, [cardsCheck])
 
     return (
         <Container>
-            <Box my="20px">
-                <Text
-                    _before={{
-                        content: '""',
-                        display: 'inline-block',
-                        bg: 'gray',
-                        boxSize: '10px',
-                        borderRadius: '50%',
-                        mx: '5px'
-                    }}
-                >
+            <Box my="20px" display="flex" direction="row" alignItems="center" gap="5px">
+                <Box
+                    display="inline-block"
+                    bg="gray"
+                    animation={animation}
+                    boxSize="10px"
+                    borderRadius="50%"
+                    mx="5px"
+                    transform="translate(-10%)"
+                ></Box>
+
+                <Text>
                     {counter.min}:{counter.sec}
                 </Text>
             </Box>
             <Divider />
             <Container h="70vh" position="relative">
-                {gameOver && (
+                {(gameOver.lost || gameOver.won) && (
                     <Box
                         flexDirection="column"
+                        bg="white"
                         position="absolute"
                         top="50%"
                         left="50%"
@@ -168,9 +183,9 @@ function StartGame() {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <Heading p="20px">{win ? 'You Won' : 'Game Over'}</Heading>
+                        <Heading p="20px">{gameOver.won ? 'You Won' : 'Game Over'}</Heading>
                         <Link onClick={() => window.location.reload(true)}>
-                            {win ? 'Play Again' : 'Try Again'}
+                            {gameOver.won ? 'Play Again' : 'Try Again'}
                         </Link>
                     </Box>
                 )}
@@ -180,8 +195,8 @@ function StartGame() {
                     m="10px"
                     w="50%"
                     mx="auto"
-                    opacity={counter.sec === '00' ? '0.5' : '1'}
-                    pointerEvents={gameOver || win ? 'none' : 'auto'}
+                    opacity={gameOver.won || gameOver.lost ? '0.5' : '1'}
+                    pointerEvents={gameOver.lost || gameOver.won ? 'none' : 'auto'}
                 >
                     {cards.map((card, index) => (
                         <Box key={index} mt="20px" onClick={(e) => handleClick(e, card, index)}>
